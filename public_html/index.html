@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="ico/favicon.ico">
+
+    <title>TODO List</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">TODO List</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#" id="show-tasks"><span class="glyphicon glyphicon-list"></span> Lista zadań</a></li>
+            <li><a href="#stats" id="show-stats"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-star"></span> Dodatki <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Jakiś feature</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Administracja <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Lista uzytkowników</a></li>
+                <li><a href="#">Konfiguracja serwera</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Statystyki bazy danych</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Michał Tuleja <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Profil</a></li>
+                <li><a href="#">Ustawienia</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Wyloguj</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container" id="stats-container">
+        <div class="jumbotron">
+          <div class="container">
+            <h2>Stats</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Liczba aktywnych zadań: 15</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Zakończonych zadań: 6</p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="container" id="list-container">
+      <div class="jumbotron">
+        
+        <div class="row">
+            <div class="col-md-8">
+                <p>Lista zadań</p>
+            </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Wprowadź tekst...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span> Szukaj</button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+
+        <table class="table table-condensed" id="task-list">
+            <tr class="active"><td>Opis zadania 1</td><td><input type="checkbox" class="task-checkbox" /></td></tr>
+            <tr class="active"><td>Opis zadania 2</td><td><input type="checkbox" class="task-checkbox" /></td></tr>
+        </table>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Wprowadź tekst...">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button"><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
+            </span>
+        </div>
+      </div>
+    </div>    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

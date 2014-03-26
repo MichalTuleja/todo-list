@@ -1,0 +1,20 @@
+/* 
+    Document   : custom
+    Created on : 18.03.2014, 01:59:44
+    Author     : Michal Tuleja <michal.tuleja@outlook.com>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#task-list tr {
+    font-size: 16pt;
+}
+
+.task-checkbox {
+    width: 24px;
+    height: 24px;
+}
