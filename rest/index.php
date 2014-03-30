@@ -11,7 +11,7 @@ Epi::setPath('view', 'public_html');
 Epi::init('route','session','database','template');
 
 EpiSession::employ(EpiSession::PHP);
-EpiDatabase::employ(EpiDatabase::MySql,'to_do_listist','localhost','root','kuba');
+EpiDatabase::employ(EpiDatabase::MySql,'to_do_listist','host','pass','user');
 
 
 //home method
