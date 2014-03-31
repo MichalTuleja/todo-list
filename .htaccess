@@ -1,0 +1,9 @@
+RewriteEngine  on
+#RewriteBase /
+
+RewriteRule ^/rest/(.*)$ rest/$1 [L]
+
+RewriteCond         %{REQUEST_URI} !public_html 
+RewriteCond         %{REQUEST_URI} !rest/
+RewriteRule  ^(.*)$  public_html/$1  [L]
+
