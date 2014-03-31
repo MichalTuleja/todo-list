@@ -1,13 +1,13 @@
 <?php
-include_once 'rest/api/Epi.php';
-include_once 'rest/config/autoload.php';
+include_once './api/Epi.php';
+include_once './config/autoload.php';
 
 spl_autoload_register('autoloadControllers');
 spl_autoload_register('autoloadClasses');
 
 // Epi::setSetting('exceptions', true);
-Epi::setPath('base', 'rest/api');
-Epi::setPath('view', 'public_html');
+Epi::setPath('base', './api');
+Epi::setPath('view', '..');
 Epi::init('route','session','database','template');
 
 EpiSession::employ(EpiSession::PHP);
