@@ -7,7 +7,7 @@ spl_autoload_register('autoloadClasses');
 
 // Epi::setSetting('exceptions', true);
 Epi::setPath('base', './api');
-Epi::setPath('view', '..');
+Epi::setPath('view', '../public_html/docs/');
 Epi::init('route','session','database','template');
 
 EpiSession::employ(EpiSession::PHP);
