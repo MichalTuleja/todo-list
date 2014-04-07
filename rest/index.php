@@ -8,7 +8,7 @@ spl_autoload_register('autoloadClasses');
 // Epi::setSetting('exceptions', true);
 Epi::setPath('base', './api');
 Epi::setPath('view', '../public_html/docs/');
-Epi::init('route','session','database','template');
+Epi::init('route','session','database','template','api');
 
 EpiSession::employ(EpiSession::PHP);
 EpiDatabase::employ(EpiDatabase::MySql,'to_do_listist','host','pass','user');
@@ -19,8 +19,8 @@ getRoute()->get('/' , array('HomeController','display'));
 getRoute()->get('/home' , array('HomeController','display'));
 
 //list method
-getRoute()->get('/list' , array('ListController' , 'get'));
-getRoute()->put('/list/(\d+)' , array('ListController' , 'update'));
+getRoute()->get('/list' , array('ListController' , 'get'), EpiApi::external);
+getRoute()->put('/list/(\d+)' , array('ListController' , 'update'), EpiApi::external);
 getRoute()->post('/list' , array('ListController' , 'insert'));
 getRoute()->delete('/list/(\d+)' , array('ListController' , 'delete'));
 

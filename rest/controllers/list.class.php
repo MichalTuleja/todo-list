@@ -22,7 +22,7 @@ class ListController{
 			$args['error'] = true;
 		}
 
-		getTemplate()->jsonResponse($args);	
+		return $args;
 	}
 
 	public static function update($id){
