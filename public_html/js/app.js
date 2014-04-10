@@ -21,7 +21,6 @@ var removeClassActiveForAllAndPrepareView = function(activeElem) {
 
 var tasks = new DataStore();
 
-//TODO - przebudowa :(
 var SimpleListModel = function(sampleData) {
     
 	this.items = ko.observableArray();
@@ -60,16 +59,6 @@ var SimpleListModel = function(sampleData) {
 			tasks.add(sampleData[i]);
 		}
 	
-        /*var sampleData = [
-            {title: "Pierwszy task", description: "opis taska 1", done: false}, 
-			{title: "Drugi task", description: "opis taska 2", done: true},
-			{title: "Trzeci task", description: "opis taska 3", done: false}
-        ]
-        
-        for(var i=0; i<sampleData.length; i++) {
-            this.items.push(sampleData[i]);
-            store.add(sampleData[i]);
-        }*/
     }
     
 };
@@ -140,10 +129,10 @@ jQuery.expr[':'].Contains = function(a,i,m){
 $('#task-list-filter').change( function () {
 				var filter = $(this).val();
 				if(filter) {
-					$('#task-list').find("div.panel-default:not(:Contains(" + filter + "))").hide();
-					$('#task-list').find("div.panel-default:Contains(" + filter + ")").show();
+					$('#task-list').find("tbody:not(:Contains(" + filter + "))").hide();
+					$('#task-list').find("tbody:Contains(" + filter + ")").show();
 				} else {
-					$('#task-list').find("div.panel-default").show();
+					$('#task-list').find("tbody.panel-default").show();
 				}
 				
 				return false;
