@@ -19,13 +19,16 @@ var removeClassActiveForAllAndPrepareView = function(activeElem) {
     $(activeElem).parent().addClass('active');
 }
 
-var store = new Store();
+var tasks = new DataStore();
 
-
-var SimpleListModel = function() {
-    this.items = ko.observableArray();
+//TODO - przebudowa :(
+var SimpleListModel = function(sampleData) {
+    
+	this.items = ko.observableArray();
     this.itemToAddTitle = ko.observable("");
 	this.itemToAddDesc = ko.observable("");
+	var timeout = 10000;
+	
     this.addItem = function() {
         if (this.itemToAddTitle() != "") {
 			if(this.itemToAddDesc != "")
@@ -35,17 +38,29 @@ var SimpleListModel = function() {
             this.items.push(newItem); // Adds the item. Writing to the "items" observableArray causes any associated UI to update.
             this.itemToAddTitle(""); // Clears the text box, because it's bound to the "itemToAdd" observable
 			this.itemToAddDesc(""); // Clears the text box, because it's bound to the "itemToAdd" observable
-            store.add(newItem);
+            tasks.add(newItem);
+			this.items(tasks.load());
         }
     }.bind(this);  // Ensure that "this" is always this view model
     
+	this.sync = function() {
+		tasks.sync(function() {
+			self.items(tasks.load());
+		});
+	}
+	
     // Constructor
-    var tmpdata = store.load();
+    var tmpdata = tasks.load();
     if(tmpdata.length > 0) {
         this.items(tmpdata);
     }
     else{
-        var sampleData = [
+		for(var i=0; i<sampleData.length; i++) {
+			this.items.push(sampleData[i]);
+			tasks.add(sampleData[i]);
+		}
+	
+        /*var sampleData = [
             {title: "Pierwszy task", description: "opis taska 1", done: false}, 
 			{title: "Drugi task", description: "opis taska 2", done: true},
 			{title: "Trzeci task", description: "opis taska 3", done: false}
@@ -54,7 +69,7 @@ var SimpleListModel = function() {
         for(var i=0; i<sampleData.length; i++) {
             this.items.push(sampleData[i]);
             store.add(sampleData[i]);
-        }
+        }*/
     }
     
 };
@@ -105,13 +120,15 @@ $(document).ready(function(){
     
     $('#show-tasks').click();
     
-    var sampleList = [
+	//$('#show-container').click(function() { switchTo('login'); });
+	
+    var sampleData = [
         {title: "Pierwszy task", description: "opis taska 1", done: false}, 
         {title: "Drugi task", description: "opis taska 2", done: true},
         {title: "Trzeci task", description: "opis taska 3", done: false}
     ];
     
-    ko.applyBindings(new SimpleListModel(sampleList));
+    ko.applyBindings(new SimpleListModel(sampleData));
 });
 
 // Contains case-insensitive
