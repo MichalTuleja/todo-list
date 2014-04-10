@@ -6,6 +6,19 @@ class ListController{
 		
 		$args = array();
 
+                // TODO: unikać "SELECT * ...", potem nie dojdziemy do ładu z polami
+                // SELECT task_id AD id, creation_time AS ctime, mtime AS mtime itd. FROM tasks
+                // tak żeby nazwy zwracanych pól były niezależne od bazy
+                /*
+                 * Ogólnie zależy mi żeby dostać coś takiego:
+                 * 
+                 * {id: [id],
+                    ctime: [ctime],
+                    mtime: [mtime],
+                    deleted: [deleted],
+                    name: [name], 
+                    done: [status]}
+                 */
 		foreach(getDatabase()->all('SELECT * FROM task') as $task){
 
 			$args['list'][] = array(
@@ -22,6 +35,8 @@ class ListController{
 			$args['error'] = true;
 		}
 
+                // Nie uzywamy template'ow, dlatego zwracamy zwykły obiekt,
+                // który jest konwertowany na JSON w locie przez bibliotekę Epiphany
 		return $args;
 	}
 
@@ -49,7 +64,7 @@ class ListController{
 			}
 		}
 
-		getTemplate()->jsonResponse($args);
+		return $args;
 	}
 
 	public static function insert(){
@@ -65,9 +80,13 @@ class ListController{
 			if((int)$insert > 0){
 				$args['error'] = false;
 			}
+                        else {
+                            // TODO: potrzebny jest id zadania które dodajemy do bazy
+                            $args['id'] = 0; // skąd wyczarować id? będzie potrzebne do zwrócenia JSONem
+                        }
 		}
 
-		getTemplate()->jsonResponse($args);	
+		return $args;	
 	}
 
 	public static function delete($id){
@@ -81,6 +100,9 @@ class ListController{
 			$isId = getDatabase()->one('SELECT t.task_id FROM task t INNER JOIN task_to_user ttu ON t.task_id = ttu.task_id WHERE t.task_id = :id',array(':id' => $id));
 
 			if((int)$isId == $id){
+                                // TODO: Request delete powinien zrobić update flagi delete w tabeli
+                                // Samo delete mogłoby być w klasie do obsługi bazy, przyda się pozniej
+                                // do API administratora
 				$deleteTaksToUser = getDatabase()->execute('DELETE FROM task_to_user WHERE task_id = :id',array(':id' => $id));
 				$deleteTask = getDatabase()->execute('DELETE FROM task WHERE task_id = :id',array(':id' => $id));
 
@@ -90,7 +112,7 @@ class ListController{
 			}
 		}
 
-		getTemplate()->jsonResponse($args);	
+		return $args;
 	}
 }
 

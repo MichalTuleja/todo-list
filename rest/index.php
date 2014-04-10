@@ -21,8 +21,8 @@ getRoute()->get('/home' , array('HomeController','display'));
 //list method
 getRoute()->get('/list' , array('ListController' , 'get'), EpiApi::external);
 getRoute()->put('/list/(\d+)' , array('ListController' , 'update'), EpiApi::external);
-getRoute()->post('/list' , array('ListController' , 'insert'));
-getRoute()->delete('/list/(\d+)' , array('ListController' , 'delete'));
+getRoute()->post('/list' , array('ListController' , 'insert'), EpiApi::external);
+getRoute()->delete('/list/(\d+)' , array('ListController' , 'delete'), EpiApi::external);
 
 //user method
 
