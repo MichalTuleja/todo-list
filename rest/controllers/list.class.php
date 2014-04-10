@@ -1,96 +1,117 @@
 <?php
 
-class ListController{
+class ListController {
 	
-	public static function get(){
+	public static function get() {
 		
 		$args = array();
 
-		foreach(getDatabase()->all('SELECT * FROM task') as $task){
+                // TODO: unikać "SELECT * ...", potem nie dojdziemy do ładu z polami
+                // SELECT task_id AD id, creation_time AS ctime, mtime AS mtime itd. FROM tasks
+                // tak żeby nazwy zwracanych pól były niezależne od bazy
+                /*
+                 * Ogólnie zależy mi żeby dostać coś takiego:
+                 * 
+                 * {id: [id],
+                    ctime: [ctime],
+                    mtime: [mtime],
+                    deleted: [deleted],
+                    name: [name], 
+                    done: [status]}
+                 */
 
-			$args['list'][] = array(
-									'id' => $task['task_id'],
-									'name' => $task['description'],
-									'status' => $task['done']
+        return getDatabase()->all(
+        							'SELECT 
+        								task_id as id,
+    									title as name,
+    									description as description,
+    									done as status,
+    									deleted as deleted,
+    									modification_date as mtime,
+    									creation_date as ctime
+									FROM 
+										task'
 									);
-		}
+	}
 
-		if(!empty($args)){
-			$args['error'] = false;
-		}
-		else{
-			$args['error'] = true;
+	public static function update($id) {
+
+		$args = array();
+		$id = (int)$id;
+		parse_str(file_get_contents("php://input"),$_PUT);
+		$_PUT = array_map('strip_tags',$_PUT);
+		
+		$tDesc = (!empty($_PUT['description'])) ? $_PUT['description'] : '';
+		$tName = (!empty($_PUT['name'])) ? trim($_PUT['name']) : '';
+		$tStatus = (isset($_PUT['status']) && (int)$_PUT['status'] > 0) ? 1 : 0;
+		$args['error'] = true;
+
+		if($id > 0) {
+			
+			$tId = (int)getDatabase()->one('SELECT task_id as id FROM task WHERE task_id=:id',array(':id' => $id))['id'];
+
+			if($tId == $id) {
+
+				$date = new DateTime();
+				$tMtime = $date->format('Y-m-d H:j:s');
+				$update = getDatabase()->execute('UPDATE task SET title = :name, description = :description, done = :status, modification_date = :mtime WHERE task_id = :id',array(':name' => $tName,':description' => $tDesc,':status' => $tStatus,':mtime' => $tMtime,':id' => $tId));
+				
+				//if in database is identical value for 'description' column ,our method return error = true
+				if((int)$update > 0) {
+					$args['error'] = false;
+				}
+			}
 		}
 
 		return $args;
 	}
 
-	public static function update($id){
+	public static function insert() {
 
 		$args = array();
-		$id = (int)$id;
-		parse_str(file_get_contents("php://input"),$_PUT);
-		$description = ($_PUT['description'] != '') ? $_PUT['description'] : '';
-		$status = (isset($_PUT['status']) && (int)$_PUT['status'] > 0) ? 1 : 0;
-		$args['error'] = true;
 
-		if($id > 0 && $description != ''){
-			
-			$task = getDatabase()->one('SELECT * FROM task WHERE task_id=:id',array(':id' => $id));
-
-			if((int)$task['task_id'] == $id){
-
-				$update = getDatabase()->execute('UPDATE task SET description = :description, done = :status WHERE task_id = :id',array(':description' => $description,':status' => $status,':id' => $id));
-				
-				//if in database is identical value for 'description' column ,our method return error = true
-				if((int)$update > 0){
-					$args['error'] = false;
-				}
-			}
-		}
-
-		getTemplate()->jsonResponse($args);
-	}
-
-	public static function insert(){
-
-		$args = array();
-		$description = ($_POST['description'] != '') ? trim($_POST['description']) : '';
+		$_POST = array_map('strip_tags',$_POST);
+		$tDesc = (!empty($_POST['description'])) ? trim($_POST['description']) : '';
+		$tName = (!empty($_POST['name'])) ? trim($_POST['name']) : '';
 
 		$args['error'] = true;
 
-		if($description != ''){
-			$insert = getDatabase()->execute('INSERT INTO task (description,done) VALUES(:description,:done)',array(':description' => $description,':done' => 0));
+		if($tDesc != '' && $tName != '') {
 
-			if((int)$insert > 0){
+			$data = new DateTime();
+			$tMtime = $data->format('Y-m-d H:j:s');
+			$insert = getDatabase()->execute('INSERT INTO task (title,description,done,deleted,modification_date) VALUES(:title,:description,:done,:deleted,:mtime)',array(':title' => $tName,':description' => $tDesc,':done' => 0,':deleted' => 0,':mtime' => $tMtime));
+
+			if((int)$insert > 0) {
 				$args['error'] = false;
+				$args['id'] = $insert;
 			}
 		}
 
-		getTemplate()->jsonResponse($args);	
+		return $args;	
 	}
 
-	public static function delete($id){
+	public static function delete($id) {
 
 		$args = array();
 		$id = (int)$id;
 		$args['error'] = true;
 
-		if($id > 0){
+		if($id > 0) {
 
-			$isId = getDatabase()->one('SELECT t.task_id FROM task t INNER JOIN task_to_user ttu ON t.task_id = ttu.task_id WHERE t.task_id = :id',array(':id' => $id));
+			$isId = getDatabase()->one('SELECT task_id as id FROM task WHERE task_id = :id',array(':id' => $id));
+			
+			if((int)$isId['id'] == $id) {
+                                
+				$delete = getDatabase()->execute('UPDATE task SET deleted = :deleted WHERE task_id = :id',array(':id' => $id,':deleted' => 1));
 
-			if((int)$isId == $id){
-				$deleteTaksToUser = getDatabase()->execute('DELETE FROM task_to_user WHERE task_id = :id',array(':id' => $id));
-				$deleteTask = getDatabase()->execute('DELETE FROM task WHERE task_id = :id',array(':id' => $id));
-
-				if((int)$deleteTask > 0 && (int)$deleteTaksToUser > 0){
+				if((int)$delete > 0) {
 					$args['error'] = false;
 				}
 			}
 		}
 
-		getTemplate()->jsonResponse($args);	
+		return $args;
 	}
 }
 
