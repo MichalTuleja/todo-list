@@ -224,8 +224,8 @@
           </div>
         </div>
 		<table class="table table-condensed" id="task-list" data-bind='foreach: items'>
-            <tr class="task-list-header"><td class="task-list-title" data-bind="text: title">Opis zadania 1</td><td><input type="checkbox" data-bind="checked: done" class="task-checkbox" /></td></tr>
-			<!--<tr class="active"><td data-bind="text: description">Opis zadania 1</td></tr>-->
+            <tr class="task-list-header"><td class="task-list-title" data-toggle="collapse" data-parent="#task-list" data-bind="text: title, attr: {href: '#item-list-collapsable' + $index()}">Opis zadania 1</td><td><input type="checkbox" data-bind="checked: done" class="task-checkbox" /></td></tr>
+			<tr class="task-list-body"><td colspan="2" class="task-list-desc collapse in" data-bind="text: description, attr: {id: 'item-list-collapsable' + $index()}">Opis zadania 1</td></tr>
 		</table>
 		<button class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#new-task-modal"  type="button"><span class="glyphicon glyphicon-plus"></span> Nowe zadanie</button>
       </div>
