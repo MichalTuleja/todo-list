@@ -75,42 +75,15 @@ root {
 
 .task-list-header {
 	background-color: #F5F5F5;
-	/*border-bottom-color: #DDD;
-	border-bottom-style: none;
-	border-bottom-width: 0px;
-	border-left-color: #DDD;
-	border-right-color: #DDD;
-	border-top-color: #DDD;*/
 	color: #333;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 14px;
 	padding: 10px 15px;
-	/*
-	border-bottom-color: #DDD;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-image-outset: 0 0 0 0;
-	border-image-repeat: stretch stretch;
-	border-image-slice: 100% 100% 100% 100%;
-	border-image-source: none;
-	border-image-width: 1 1 1 1;
-	border-left-color: #DDD;
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-right-color: #DDD;
-	border-right-style: solid;
-	border-right-width: 1px;
-	border-top-color: #DDD;
-	border-top-style: solid;
-	border-top-width: 1px;*/
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 	line-height: 20px;
-	overflow: hidden;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	-moz-box-sizing: border-box;
-	-moz-border-radius: 3px;
-	border-radius: 0px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
 }
 
 .task-list-title {
@@ -128,23 +101,11 @@ root {
 	background-color: #FFF;
 	color: #333;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 14px;
-	line-height: 20px;
-	padding-bottom: 15px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 15px;
-	-moz-box-sizing: border-box;
 }
 
 .task-list-body {
 	background-color: #FFF;
 	color: #333;
-	display: block;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 14px;
-	line-height: 20px;
-	-moz-box-sizing: border-box;
 }
 
 .task-list-desc.collapse {
@@ -152,15 +113,17 @@ root {
 }
 
 .task-list-desc.collapse.in {
-	display: block;
+	display: table-cell;
 }
 
 .task-list-desc.collapsing {
-  position: relative;
-  height: 0;
-  overflow: hidden;
-  -webkit-transition: height .35s ease;
-          transition: height .35s ease;
+	position: relative;
+	height: 0;
+	overflow: hidden;
+	-moz-transition: height .35s; /* Firefox 4 */
+	-o-transition: height .35s; /* Opera */
+	-webkit-transition: height .35s ease;
+	transition: height .35s ease;
 }
 
 .table-condensed > tbody > tr > td, .table-condensed > tfoot > tr > td {
@@ -172,38 +135,4 @@ root {
     line-height: 1.42857;
 	vertical-align: middle;
     border-top: 1px solid #DDD;
-}
-
-<!--TODO-->
-
-.panel {
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-}
-
-.panel-group .panel {
-  margin-bottom: 0;
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-.panel-body {
-  padding: 15px;
-}
-.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-
-.panel-title {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 16px;
-  color: inherit;
 }

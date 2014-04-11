@@ -46,8 +46,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Zapisz</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Zapisz</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
 					</div>
 				</form>
 			</div>
@@ -105,8 +105,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Zapisz</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Zapisz</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
 					</div>
 				</form>
 			</div>
@@ -138,8 +138,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Zapisz</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Zapisz</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
 					</div>
 				</form>
 			</div>
@@ -174,6 +174,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Administracja <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" id="show-userlist">Lista uzytkowników</a></li>
+				<li><a href="#" id="show-tasklist">Lista zadań</a></li>
                 <li><a href="#">Konfiguracja serwera</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Statystyki bazy danych</a></li>
@@ -224,8 +225,11 @@
           </div>
         </div>
 		<table class="table table-condensed" id="task-list" data-bind='foreach: items'>
-            <tr class="task-list-header"><td class="task-list-title" data-toggle="collapse" data-parent="#task-list" data-bind="text: title, attr: {href: '#item-list-collapsable' + $index()}">Opis zadania 1</td><td><input type="checkbox" data-bind="checked: done" class="task-checkbox" /></td></tr>
-			<tr class="task-list-body"><td colspan="2" class="task-list-desc collapse in" data-bind="text: description, attr: {id: 'item-list-collapsable' + $index()}">Opis zadania 1</td></tr>
+            <tr class="task-list-header">
+				<td class="collapsed" data-toggle="collapse" data-parent="#task-list" data-bind="text: title, attr: {href: '#item-list-collapsable' + $index()}">Opis zadania 1</td>
+				<td><input type="checkbox" data-bind="checked: done, attr: {id: 'item-list-checkbox' + $index()}" class="task-checkbox align-right" /></td>
+			</tr>
+			<tr class="task-list-body"><td colspan="2" class="task-list-desc collapse" data-bind="text: description, attr: {id: 'item-list-collapsable' + $index()}">Opis zadania 1</td></tr>
 		</table>
 		<button class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#new-task-modal"  type="button"><span class="glyphicon glyphicon-plus"></span> Nowe zadanie</button>
       </div>
@@ -251,9 +255,9 @@
 			<div class="modal-footer">
 				<div class="input-group">
 					<div class="btn-group">
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal">Zmień nazwę</button>
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#email-modal">Zmień email</button>
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#password-modal">Zmień hasło</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal"><span class="glyphicon glyphicon-user"></span> Zmień nazwę</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#email-modal"><span class="glyphicon glyphicon-envelope"></span> Zmień email</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#password-modal"><span class="glyphicon glyphicon-lock"></span> Zmień hasło</button>
 					</div>
 				</div>
 			</div>
@@ -294,6 +298,12 @@
 				<div class="col-md-8">
 					<p>Lista Użytkowników</p>
 				</div>
+				<div class="col-md-4">
+					<div class="align-right right-inner-addon">
+						<i class="glyphicon glyphicon-search"></i>
+						<input type="text" class="form-control" placeholder="Wyszukaj" id="admin-user-list-filter">
+					</div>
+				</div>
 			</div>
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -321,6 +331,54 @@
 							<td data-toggle="modal" data-target="#user-modal">user@example.com</td>
 							<td data-toggle="modal" data-target="#user-modal">User</td>
 							<td data-toggle="modal" data-target="#user-modal"><span class="glyphicon glyphicon-remove"></td>
+							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
+							<td class="hidden">2</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+        </div>
+    </div>
+	
+	<div class="container hidden-container" id="tasklist-container">
+        <div class="jumbotron">
+			<div class="row">
+				<div class="col-md-8">
+					<p>Lista Zadań</p>
+				</div>
+				<div class="col-md-4">
+					<div class="align-right right-inner-addon">
+						<i class="glyphicon glyphicon-search"></i>
+						<input type="text" class="form-control" placeholder="Wyszukaj" id="admin-task-list-filter">
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover" id="admin-task-list">
+					<thead>
+						<tr>
+							<th>Tytuł</th>
+							<th>Opis</th> 
+							<th>Zakończone</th>
+							<th>Ostatnio modyfikowane</th>
+							<th></th>
+							<th class="hidden">#</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 1</td>
+							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 1</td>
+							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-ok"></td>
+							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
+							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
+							<td class="hidden">1</td>
+						</tr>
+						<tr>
+							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 2</td>
+							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 2</td>
+							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-remove"></td>
+							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
 							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
 							<td class="hidden">2</td>
 						</tr>
@@ -371,11 +429,11 @@
 				</div>
 				<div class="modal-footer">
 					<div class="col-sm-2">
-						<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#password-modal">Nowe hasło</button>
+						<button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#password-modal"><span class="glyphicon glyphicon-lock"></span> Nowe hasło</button>
 					</div>
 					<div class="col-sm-10">
-						<button type="submit" class="btn btn-success">Zapisz</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Zapisz</button>
+						<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
 					</div>
 				</div>
 			</form>
