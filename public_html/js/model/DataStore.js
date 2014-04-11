@@ -3,7 +3,7 @@
 
 var DataStore = function() {
     var data = new Array();
-    var serverUri = 'http://tododev.demo.intelifusion.net';
+    var serverUri = config.serverUri;
     var requestUri = serverUri + '/rest/list';
     
     this.add = function(obj) {
