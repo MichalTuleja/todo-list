@@ -1,3 +1,7 @@
+var config = {
+    serverUri: 'http://localhost'
+}
+
 var tabs = ['list-container', 'stats-container', 'signin-container', 'profile-container', 'userlist-container', 'useredit-container'];
 
 var hideAll = function() {
