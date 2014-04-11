@@ -1,8 +1,8 @@
+var tabs = ['list-container', 'stats-container', 'signin-container', 'profile-container', 'userlist-container', 'tasklist-container', 'useredit-container'];
+
 var config = {
     serverUri: 'http://localhost'
 }
-
-var tabs = ['list-container', 'stats-container', 'signin-container', 'profile-container', 'userlist-container', 'useredit-container'];
 
 var hideAll = function() {
     for(var i = 0; i < tabs.length; i++) {
@@ -20,6 +20,7 @@ var removeClassActiveForAllAndPrepareView = function(activeElem) {
     $('#show-tasks').parent().removeClass('active');
 	$('#show-userlist').parent().removeClass('active');
 	$('#show-profile').parent().removeClass('active');
+	$('#show-tasklist').parent().removeClass('active');
     $(activeElem).parent().addClass('active');
 }
 
@@ -74,6 +75,12 @@ $(document).ready(function(){
         switchTo('list-container'); 
     });
     
+	$('#show-tasklist').click(function() { 
+        removeClassActiveForAllAndPrepareView(this);
+        //$(this).parent().addClass('active');
+        switchTo('tasklist-container'); 
+    });
+	
 	$('#logo').click(function() { 
         removeClassActiveForAllAndPrepareView(this);
         //$(this).parent().addClass('active');
@@ -136,7 +143,7 @@ $('#task-list-filter').change( function () {
 					$('#task-list').find("tbody:not(:Contains(" + filter + "))").hide();
 					$('#task-list').find("tbody:Contains(" + filter + ")").show();
 				} else {
-					$('#task-list').find("tbody.panel-default").show();
+					$('#task-list').find("tbody").show();
 				}
 				
 				return false;
