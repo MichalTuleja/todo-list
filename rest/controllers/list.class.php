@@ -37,13 +37,15 @@ class ListController {
 	public static function update($id) {
 
 		$args = array();
-		$id = (int)$id;
-		parse_str(file_get_contents("php://input"),$_POST);
-		$_POST = array_map('strip_tags',$_POST);
 		
-		$tDesc = (!empty($_POST['description'])) ? $_POST['description'] : '';
-		$tName = (!empty($_POST['name'])) ? trim($_POST['name']) : '';
-		$tStatus = (isset($_POST['status']) && (int)$_POST['status'] > 0) ? 1 : 0;
+                $id = (int)$id;
+                
+		$json = json_decode(file_get_contents("php://input"), true);
+
+		$tDesc = (!empty($json['description'])) ? $json['description'] : '';
+		$tName = (!empty($json['name'])) ? trim($json['name']) : '';
+		$tStatus = (isset($json['status']) && (int)$json['status'] > 0) ? 1 : 0;
+                
 		$args['error'] = true;
 
 		if($id > 0) {
@@ -68,19 +70,13 @@ class ListController {
 
 	public static function insert() {
 
-		$args = array();
-
-		parse_str(file_get_contents("php://input"),$_PUT);
-		$_PUT = array_map('strip_tags',$_PUT);
-		$tDesc = (!empty($_PUT['description'])) ? trim($_PUT['description']) : '';
-		$tName = (!empty($_PUT['name'])) ? trim($_PUT['name']) : '';
-
-		$args['error'] = true;
+		$_PUT = json_decode(file_get_contents("php://input"), true);
                 
-                error_log(implode(',',$_PUT));
-                error_log(file_get_contents("php://input"));
-                error_log($tDesc);
-                error_log($tName);
+		$tDesc = (!empty($_PUT['description'])) ? $_PUT['description'] : '';
+		$tName = (!empty($_PUT['name'])) ? trim($_PUT['name']) : '';
+		//$tStatus = (isset($_PUT['status']) && (int)$_PUT['status'] > 0) ? 1 : 0;
+                
+		$args['error'] = true;
                 
 		if($tDesc != '' && $tName != '') {
 
