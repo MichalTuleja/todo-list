@@ -33,15 +33,22 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="name-modal-label">Wprowadź nową nazwę</h4>
+					<h4 class="modal-title" id="name-modal-label">Wprowadź nowe imię i nazwisko</h4>
 				</div>
 				<form class="form-horizontal" role="form">
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="inputChangeName" class="col-sm-2 control-label">Nazwa</label>
+							<label for="inputChangeName" class="col-sm-2 control-label">Imię</label>
 							<div class="col-sm-10 left-inner-addon">
 								<i class="glyphicon glyphicon-user"></i>
-								<input id="inputChangeName" type="text" class="form-control" placeholder="Nazwa" required>
+								<input id="inputChangeName" type="text" class="form-control" placeholder="Imię" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputChangeSurname" class="col-sm-2 control-label">Nazwisko</label>
+							<div class="col-sm-10 left-inner-addon">
+								<i class="glyphicon glyphicon-user"></i>
+								<input id="inputChangeSurname" type="text" class="form-control" placeholder="Nazwisko" required>
 							</div>
 						</div>
 					</div>
@@ -147,7 +154,7 @@
 	</div>
   
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="fixed-navbar">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -173,7 +180,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Administracja <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#" id="show-userlist">Lista uzytkowników</a></li>
+                <li><a href="#" id="show-userlist">Lista użytkowników</a></li>
 				<li><a href="#" id="show-tasklist">Lista zadań</a></li>
                 <li><a href="#">Konfiguracja serwera</a></li>
                 <li class="divider"></li>
@@ -244,8 +251,12 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-4">Nazwa:</div>
-					<div class="col-md-8"><b>Michał Tuleja</b></div>
+					<div class="col-md-4">Imię:</div>
+					<div class="col-md-8"><b>Michał</b></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">Nazwisko:</div>
+					<div class="col-md-8"><b>Tuleja</b></div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">Email:</div>
@@ -255,7 +266,7 @@
 			<div class="modal-footer">
 				<div class="input-group">
 					<div class="btn-group">
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal"><span class="glyphicon glyphicon-user"></span> Zmień nazwę</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal"><span class="glyphicon glyphicon-user"></span> Zmień imię i nazwisko</button>
 						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#email-modal"><span class="glyphicon glyphicon-envelope"></span> Zmień email</button>
 						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#password-modal"><span class="glyphicon glyphicon-lock"></span> Zmień hasło</button>
 					</div>
@@ -309,7 +320,8 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Nazwa</th>
+							<th>Imię</th>
+							<th>Nazwisko</th>
 							<th>Email</th> 
 							<th>Rola</th>
 							<th>Aktywny</th>
@@ -319,7 +331,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td data-toggle="modal" data-target="#user-modal">Michał Tuleja</td>
+							<td data-toggle="modal" data-target="#user-modal">Michał</td>
+							<td data-toggle="modal" data-target="#user-modal">Tuleja</td>
 							<td data-toggle="modal" data-target="#user-modal">user@example.com</td>
 							<td data-toggle="modal" data-target="#user-modal">Admin</td>
 							<td data-toggle="modal" data-target="#user-modal"><span class="glyphicon glyphicon-ok"></td>
@@ -327,6 +340,7 @@
 							<td class="hidden">1</td>
 						</tr>
 						<tr>
+							<td data-toggle="modal" data-target="#user-modal">user</td>
 							<td data-toggle="modal" data-target="#user-modal">user</td>
 							<td data-toggle="modal" data-target="#user-modal">user@example.com</td>
 							<td data-toggle="modal" data-target="#user-modal">User</td>
@@ -358,7 +372,8 @@
 					<thead>
 						<tr>
 							<th>Tytuł</th>
-							<th>Opis</th> 
+							<th>Opis</th>
+							<th>Użytkownik</th>
 							<th>Zakończone</th>
 							<th>Ostatnio modyfikowane</th>
 							<th></th>
@@ -369,6 +384,7 @@
 						<tr>
 							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 1</td>
 							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 1</td>
+							<td data-toggle="modal" data-target="#task-edit-modal">Michał Tuleja</td>
 							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-ok"></td>
 							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
 							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
@@ -377,6 +393,7 @@
 						<tr>
 							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 2</td>
 							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 2</td>
+							<td data-toggle="modal" data-target="#task-edit-modal">user user</td>
 							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-remove"></td>
 							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
 							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
@@ -398,10 +415,17 @@
 			<form class="form-horizontal" role="form">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="inputChangeUserName" class="col-sm-2 control-label">Nazwa</label>
+						<label for="inputChangeUserName" class="col-sm-2 control-label">Imię</label>
 						<div class="col-sm-10 left-inner-addon">
 							<i class="glyphicon glyphicon-user"></i>
-							<input id="inputChangeUserName" type="text" class="form-control" placeholder="Nazwa" value="Michał Tuleja" required>
+							<input id="inputChangeUserName" type="text" class="form-control" placeholder="Imię" value="Michał" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputChangeUserSurname" class="col-sm-2 control-label">Nazwisko</label>
+						<div class="col-sm-10 left-inner-addon">
+							<i class="glyphicon glyphicon-user"></i>
+							<input id="inputChangeUserSurname" type="text" class="form-control" placeholder="Nazwisko" value="Tuleja" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -447,6 +471,7 @@
     <script src="js/lib/vendor/bootstrap.min.js"></script>
     <script src="js/lib/vendor/knockout-3.1.0.js"></script>
     <script src="js/lib/vendor/store.min.js"></script>
+	<script src="js/lib/vendor/jqBootstrapValidation.js"></script>
 	<script src="js/model/DataStore.js"></script>
     <script src="js/app.js"></script>
   </body>

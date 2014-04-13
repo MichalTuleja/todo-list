@@ -35,7 +35,7 @@ var SimpleListModel = function(sampleData) {
 	
     this.addItem = function() {
         if (this.itemToAddTitle() != "") {
-			if(this.itemToAddDesc != "")
+			if(this.itemToAddDesc() != "")
 				var newItem = {title: this.itemToAddTitle(), description: this.itemToAddDesc(), done: false};
 			else
 				var newItem = {title: this.itemToAddTitle(), description: this.itemToAddTitle(), done: false};
