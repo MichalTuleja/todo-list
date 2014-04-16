@@ -27,6 +27,41 @@
 
   <body>
 
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" id="logo">TODO List</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#" id="show-tasks"><span class="glyphicon glyphicon-list"></span> Lista zadań</a></li>
+            <li><a href="#stats" id="show-stats"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="admin.html"><span class="glyphicon glyphicon-cog"></span> Administracja</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Michał Tuleja <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" id="show-profile">Profil</a></li>
+                <li><a href="#">Ustawienia</a></li>
+                <li class="divider"></li>
+                <li><a href="#" id="logout">Wyloguj</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+      
 	<!-- Modals -->
 	<div class="modal fade" id="name-modal" tabindex="-1" role="dialog" aria-labelledby="name-modal-label" aria-hidden="true">
 		<div class="modal-dialog">
@@ -146,53 +181,7 @@
 		</div>
 	</div>
   
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#" id="logo">TODO List</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#" id="show-tasks"><span class="glyphicon glyphicon-list"></span> Lista zadań</a></li>
-            <li><a href="#stats" id="show-stats"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
-           <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-star"></span> Dodatki <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#" id="show-signin">Zaloguj</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Administracja <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#" id="show-userlist">Lista uzytkowników</a></li>
-				<li><a href="#" id="show-tasklist">Lista zadań</a></li>
-                <li><a href="#">Konfiguracja serwera</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Statystyki bazy danych</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Michał Tuleja <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#" id="show-profile">Profil</a></li>
-                <li><a href="#">Ustawienia</a></li>
-                <li class="divider"></li>
-                <li><a href="#" id="logout">Wyloguj</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+
 
    <!-- Containers -->
     <div class="container hidden-container" id="stats-container">
@@ -291,102 +280,7 @@
 		</div>
 	</div>
 	
-	<!--Admin Panel Containers -->
-	<div class="container hidden-container" id="userlist-container">
-        <div class="jumbotron">
-			<div class="row">
-				<div class="col-md-8">
-					<p>Lista Użytkowników</p>
-				</div>
-				<div class="col-md-4">
-					<div class="align-right right-inner-addon">
-						<i class="glyphicon glyphicon-search"></i>
-						<input type="text" class="form-control" placeholder="Wyszukaj" id="admin-user-list-filter">
-					</div>
-				</div>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Nazwa</th>
-							<th>Email</th> 
-							<th>Rola</th>
-							<th>Aktywny</th>
-							<th></th>
-							<th class="hidden">#</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td data-toggle="modal" data-target="#user-modal">Michał Tuleja</td>
-							<td data-toggle="modal" data-target="#user-modal">user@example.com</td>
-							<td data-toggle="modal" data-target="#user-modal">Admin</td>
-							<td data-toggle="modal" data-target="#user-modal"><span class="glyphicon glyphicon-ok"></td>
-							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
-							<td class="hidden">1</td>
-						</tr>
-						<tr>
-							<td data-toggle="modal" data-target="#user-modal">user</td>
-							<td data-toggle="modal" data-target="#user-modal">user@example.com</td>
-							<td data-toggle="modal" data-target="#user-modal">User</td>
-							<td data-toggle="modal" data-target="#user-modal"><span class="glyphicon glyphicon-remove"></td>
-							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
-							<td class="hidden">2</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-        </div>
-    </div>
-	
-	<div class="container hidden-container" id="tasklist-container">
-        <div class="jumbotron">
-			<div class="row">
-				<div class="col-md-8">
-					<p>Lista Zadań</p>
-				</div>
-				<div class="col-md-4">
-					<div class="align-right right-inner-addon">
-						<i class="glyphicon glyphicon-search"></i>
-						<input type="text" class="form-control" placeholder="Wyszukaj" id="admin-task-list-filter">
-					</div>
-				</div>
-			</div>
-			<div class="table-responsive">
-				<table class="table table-hover" id="admin-task-list">
-					<thead>
-						<tr>
-							<th>Tytuł</th>
-							<th>Opis</th> 
-							<th>Zakończone</th>
-							<th>Ostatnio modyfikowane</th>
-							<th></th>
-							<th class="hidden">#</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 1</td>
-							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 1</td>
-							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-ok"></td>
-							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
-							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
-							<td class="hidden">1</td>
-						</tr>
-						<tr>
-							<td data-toggle="modal" data-target="#task-edit-modal">Przykładowe zadanie 2</td>
-							<td data-toggle="modal" data-target="#task-edit-modal">Opis zadania 2</td>
-							<td data-toggle="modal" data-target="#task-edit-modal"><span class="glyphicon glyphicon-remove"></td>
-							<td data-toggle="modal" data-target="#task-edit-modal">2012-12-12</td>
-							<td><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove-circle"></span> Usuń</button></th>
-							<td class="hidden">2</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-        </div>
-    </div>
+
 	
 	<div class="container hidden-container" id="useredit-container">
         <div class="jumbotron">
@@ -443,11 +337,15 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/lib/vendor/jquery.min.js"></script>
     <script src="js/lib/vendor/bootstrap.min.js"></script>
     <script src="js/lib/vendor/knockout-3.1.0.js"></script>
     <script src="js/lib/vendor/store.min.js"></script>
-	<script src="js/model/DataStore.js"></script>
-    <script src="js/app.js"></script>
+    
+	<script src="js/user/model/DataStore.js"></script>
+    <script src="js/user/viewmodel/TaskList.js"></script>
+    <script src="js/user/routing.js"></script>
+    <script src="js/user/filtering.js"></script>
+    <script src="js/user/app.js"></script>
   </body>
 </html>
