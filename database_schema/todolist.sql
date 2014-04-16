@@ -42,6 +42,8 @@ CREATE TABLE task
 CREATE TABLE user
 (
 	user_id int NOT NULL AUTO_INCREMENT,
+	name varchar(32) NOT NULL,
+	surname varchar(32) NOT NULL,
 	email varchar(32) NOT NULL,
 	password varchar(32) NOT NULL,
 	role int NOT NULL,
@@ -61,15 +63,15 @@ CREATE TABLE task_to_user
 	FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
-INSERT INTO user (email, password, role, is_active, modification_date, creation_date) VALUES('user1@example.com','examplepass1','0','1',NOW(), NOW());
+INSERT INTO user (name, surname, email, password, role, is_active, modification_date, creation_date) VALUES('user','1','user1@example.com','examplepass1','0','1',NOW(), NOW());
 INSERT INTO task (title, description, deleted, done, modification_date, creation_date) VALUES('testowe zadanie 1','testowe zadanie 1', '0','0', NOW(), NOW());
 INSERT INTO task_to_user (task_id, user_id) VALUES(1,1);
 
-INSERT INTO user (email, password, role, is_active, modification_date, creation_date) VALUES('user2@example.com','examplepass2','1','1',NOW(), NOW());
+INSERT INTO user (name, surname, email, password, role, is_active, modification_date, creation_date) VALUES('user','2','user2@example.com','examplepass2','1','1',NOW(), NOW());
 INSERT INTO task (title, description, deleted, done, modification_date, creation_date) VALUES('testowe zadanie 2','testowe zadanie 2', '0','0', NOW(), NOW());
 INSERT INTO task_to_user (task_id, user_id) VALUES(2,2);
 
-INSERT INTO user (email, password, role, is_active, modification_date, creation_date) VALUES('user3@example.com','examplepass3','1','1',NOW(), NOW());
+INSERT INTO user (name, surname, email, password, role, is_active, modification_date, creation_date) VALUES('user','3','user3@example.com','examplepass3','1','1',NOW(), NOW());
 INSERT INTO task (title, description, deleted, done, modification_date, creation_date) VALUES('testowe zadanie 3','testowe zadanie 3', '0','0', NOW(), NOW());
 INSERT INTO task_to_user (task_id, user_id) VALUES(3,3);
 

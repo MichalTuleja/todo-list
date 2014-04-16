@@ -68,15 +68,22 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="name-modal-label">Wprowadź nową nazwę</h4>
+					<h4 class="modal-title" id="name-modal-label">Wprowadź nowe imię i nazwisko</h4>
 				</div>
 				<form class="form-horizontal" role="form">
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="inputChangeName" class="col-sm-2 control-label">Nazwa</label>
+							<label for="inputChangeName" class="col-sm-2 control-label">Imię</label>
 							<div class="col-sm-10 left-inner-addon">
 								<i class="glyphicon glyphicon-user"></i>
-								<input id="inputChangeName" type="text" class="form-control" placeholder="Nazwa" required>
+								<input id="inputChangeName" type="text" class="form-control" placeholder="Imię" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputChangeSurname" class="col-sm-2 control-label">Nazwisko</label>
+							<div class="col-sm-10 left-inner-addon">
+								<i class="glyphicon glyphicon-user"></i>
+								<input id="inputChangeSurname" type="text" class="form-control" placeholder="Nazwisko" required>
 							</div>
 						</div>
 					</div>
@@ -233,8 +240,12 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-4">Nazwa:</div>
-					<div class="col-md-8"><b>Michał Tuleja</b></div>
+					<div class="col-md-4">Imię:</div>
+					<div class="col-md-8"><b>Michał</b></div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">Nazwisko:</div>
+					<div class="col-md-8"><b>Tuleja</b></div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">Email:</div>
@@ -244,7 +255,7 @@
 			<div class="modal-footer">
 				<div class="input-group">
 					<div class="btn-group">
-						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal"><span class="glyphicon glyphicon-user"></span> Zmień nazwę</button>
+						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#name-modal"><span class="glyphicon glyphicon-user"></span> Zmień imię i nazwisko</button>
 						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#email-modal"><span class="glyphicon glyphicon-envelope"></span> Zmień email</button>
 						<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#password-modal"><span class="glyphicon glyphicon-lock"></span> Zmień hasło</button>
 					</div>
@@ -292,10 +303,17 @@
 			<form class="form-horizontal" role="form">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="inputChangeUserName" class="col-sm-2 control-label">Nazwa</label>
+						<label for="inputChangeUserName" class="col-sm-2 control-label">Imię</label>
 						<div class="col-sm-10 left-inner-addon">
 							<i class="glyphicon glyphicon-user"></i>
-							<input id="inputChangeUserName" type="text" class="form-control" placeholder="Nazwa" value="Michał Tuleja" required>
+							<input id="inputChangeUserName" type="text" class="form-control" placeholder="Imię" value="Michał" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputChangeUserSurname" class="col-sm-2 control-label">Nazwisko</label>
+						<div class="col-sm-10 left-inner-addon">
+							<i class="glyphicon glyphicon-user"></i>
+							<input id="inputChangeUserSurname" type="text" class="form-control" placeholder="Nazwisko" value="Tuleja" required>
 						</div>
 					</div>
 					<div class="form-group">
