@@ -10,32 +10,19 @@ var sampleData = [
 
 var tasks = new DataStore();
  
+var tasklist = new TaskListViewModel(sampleData);
+var navbar = new NavBarViewModel();
+var loginForm = new LoginFormViewModel();
+ 
 $(document).ready(function(){
     Router.initialize();
     Router.switchTo('list-container');
   
-    // View-model binding
-    // Task list
-    ko.applyBindings(new TaskListViewModel(sampleData));
+    ko.applyBindings(tasklist, document.getElementById('list-container'));
+    ko.applyBindings(navbar, document.getElementById('navbar'));
+    ko.applyBindings(loginForm, document.getElementById('signin-container'));
+    
+    navbar.userName('Michal Tuleja');
+    navbar.isAdmin(true);
+    navbar.isVisible(true);
 });
-
-// Contains case-insensitive
-jQuery.expr[':'].Contains = function(a,i,m){
-		return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
-	};
-
-// Task list filter
-$('#task-list-filter').change( function () {
-				var filter = $(this).val();
-				if(filter) {
-					$('#task-list').find("tbody:not(:Contains(" + filter + "))").hide();
-					$('#task-list').find("tbody:Contains(" + filter + ")").show();
-				} else {
-					$('#task-list').find("tbody").show();
-				}
-				
-				return false;
-			})
-			.keyup( function () {
-				$(this).change();
-			});

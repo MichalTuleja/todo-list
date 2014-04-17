@@ -8,12 +8,12 @@ var Router = new (function() {
         hideAll();
         bindEvents();
         removeClassActiveForAllAndPrepareView("#show-tasks");
-    }
+    };
     
     this.switchTo = function(tabName) {
         hideAll();
         $('#' + tabName).show();
-    }
+    };
     
     var bindEvents = function() {
         
@@ -26,7 +26,7 @@ var Router = new (function() {
             }
             catch(e) {
             }
-        }
+        };
         
         bind('show-tasks', 'list-container');
         bind('show-tasklist', 'tasklist-container');
@@ -35,13 +35,13 @@ var Router = new (function() {
         bind('logout', 'signin-container');
         bind('show-profile', 'profile-container');
         bind('show-userlist', 'userlist-container');
-    }
+    };
 
     var hideAll = function() {
         for(var i = 0; i < tabs.length; i++) {
             $('#' + tabs[i]).hide();
         }
-    }
+    };
 
     var removeClassActiveForAllAndPrepareView = function(activeElem) {
         $('#show-stats').parent().removeClass('active');
@@ -50,5 +50,5 @@ var Router = new (function() {
         $('#show-profile').parent().removeClass('active');
         $('#show-tasklist').parent().removeClass('active');
         $(activeElem).parent().addClass('active');
-    }
+    };
 })();

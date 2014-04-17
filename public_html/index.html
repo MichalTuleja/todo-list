@@ -28,7 +28,7 @@
   <body>
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top" data-bind="visible: isVisible" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,16 +45,14 @@
             <li><a href="#stats" id="show-stats"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li data-bind="visible: isAdmin"><a href="admin.html"><span class="glyphicon glyphicon-cog"></span> Administracja</a></li>
             <li class="dropdown">
-              <a href="admin.html"><span class="glyphicon glyphicon-cog"></span> Administracja</a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Michał Tuleja <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span data-bind="text: userName">User Name</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#" id="show-profile">Profil</a></li>
                 <li><a href="#">Ustawienia</a></li>
                 <li class="divider"></li>
-                <li><a href="#" id="logout">Wyloguj</a></li>
+                <li><a href="#" data-bind="click: logout">Wyloguj</a></li>
               </ul>
             </li>
           </ul>
@@ -266,27 +264,27 @@
 	
 	<!--Login Container-->
 	<div class="container hidden-container" id="signin-container">
-        <div class="jumbotron">
+        <div class="jumbotron" data-bind="visible: isVisible">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-4">
 					<p>Logowanie</p>
 				</div>
-			</div>
-			<div class="row">
-				<form class="form-signin" role="form">
+                <div class="col-md-4">
+				<form class="form-signin" role="form" data-bind="submit: login">
 					<div class="left-inner-addon width-full">
 						<i class="glyphicon glyphicon-envelope"></i>
-						<input type="email" class="form-control" placeholder="Email" required autofocus>
+						<input type="email" class="form-control" placeholder="Email" required autofocus data-bind="value: user">
 					</div>
 					<div class="left-inner-addon width-full">
 						<i class="glyphicon glyphicon-lock"></i>
-						<input type="password" class="form-control" placeholder="Hasło" required>
+						<input type="password" class="form-control" placeholder="Hasło" required data-bind="value: pass">
 					</div>
 					<!--<label class="checkbox">
 					<input type="checkbox" value="remember-me"> Remember me
 					</label>-->
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+					<button class="btn btn-lg btn-primary btn-block" type="submit" data-bind="text: buttonText">Zaloguj</button>
 				</form>
+                    </div>
 			</div>
 		</div>
 	</div>
@@ -359,8 +357,12 @@
     <script src="js/lib/vendor/bootstrap.min.js"></script>
     <script src="js/lib/vendor/knockout-3.1.0.js"></script>
     <script src="js/lib/vendor/store.min.js"></script>
+    <script src="js/lib/jQueryExtensions.js"></script>
     
 	<script src="js/user/model/DataStore.js"></script>
+    
+    <script src="js/user/viewmodel/NavBar.js"></script>
+    <script src="js/user/viewmodel/LoginForm.js"></script>
     <script src="js/user/viewmodel/TaskList.js"></script>
     <script src="js/user/routing.js"></script>
     <script src="js/user/filtering.js"></script>
