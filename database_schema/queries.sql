@@ -138,5 +138,17 @@ delete from
 where
 	task_to_user_id=''
 
+# zapytanie zwracające statystyki globalne
+# select
+#	count(distinct(ttu.task_id) as tassign,
+#	count(IF t.done= '1') as tdone,
+#	count(t.task_id) as tall,
+#	tall - tdone as tactive,
+#	count(distinct(ttu.user_id)) as uassign,
+#	count(distinct(u.user_id)) as uall,
+# from
+#	task_to_user as ttu,
+#	task as t,
+#	user as u	
 
 
