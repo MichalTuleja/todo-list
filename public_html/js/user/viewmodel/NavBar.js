@@ -14,5 +14,10 @@ var NavBarViewModel = function() {
         
         Router.switchTo('signin-container');
     }
+    
+    this.sync = function() {
+        console.log("Synchronizing data...");
+        Signals.data.forceSync.dispatch();
+    }
 };
 

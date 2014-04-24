@@ -2,140 +2,191 @@
  */
 
 var DataStore = function() {
+    var self = this;
+
     var data = new Array();
     var serverUri = config.serverUri;
-    var requestUri = serverUri + '/rest/list';
+    var getAllUri = serverUri + '/rest/list';
+    var syncUri = serverUri + '/rest/sync';
+
+    var requiredData = ['id', 'ctime', 'mtime', 'deleted', 'name', 'status', 'description'];
+
+
+    this.getData = function() {
+        return data;
+    };
     
+    this.update = function(currentData) {
+        data = currentData;
+        save();
+    }
+
+    this.pushData = function() {
+        
+    };
+
     this.add = function(obj) {
         data.push(obj);
         save();
-    }
-    
+    };
+
     var save = function() {
         store.set('todolist', data);
-    }
-    
-    this.load = function() {
+    };
+
+    var load = function() {
         tmpdata = store.get('todolist');
-        
-        if(tmpdata !=null) {
-            data = tmpdata;    
+
+        if (tmpdata != null) {
+            data = tmpdata;
         }
-        
-        return data;
+    };
+
+    var validate = function(obj) {
+        var validateEntry = function(entry) {
+            for (var i = 0; i < requiredData.length; i++) {
+                fieldName = requiredData[i];
+
+                if (typeof entry[fieldName] === 'undefined') {
+                    entry[fieldName] = null;
+                }
+                else {
+                    if (fieldName === 'status') {
+                        if (entry[fieldName] === '1') {
+                            entry[fieldName] = true;
+                        }
+                        else {
+                            entry[fieldName] = false;
+                        }
+                    }
+
+                    if (fieldName === 'deleted') {
+                        if (entry[fieldName] === '1') {
+                            entry[fieldName] = true;
+                        }
+                        else {
+                            entry[fieldName] = false;
+                        }
+                    }
+                }
+
+            }
+
+            return entry;
+        }
+
+        var validateArray = function(array) {
+            for (var i = 0; i < array.length; i++) {
+                array[i] = validateEntry(array[i]);
+            }
+
+            return array;
+        }
+
+        if (obj.length === undefined) {
+            return validateEntry(obj);
+        }
+        else if (obj.length > 0) {
+            return validateArray(obj);
+        }
+        else {
+            return null;
+        }
     }
 
-    /* Funkcja synchronizująca dane
-     *  - uploaduje nowe taski 
-     *  - pobiera wszytskie z serwera
-     *  - sprawdza czy coś się nie zmieniło
-     *  - jak id są takie same a serwer ma nowszy to merge
-     *  - jak klient ma nowszy to robi updatre (POST) z określonym id do serwera
-     *  
-     *  - TODO na przyszłość (performance): jak jest kilka tasków do update'u,
-     *    to wygenerować jeden mega-request updateujący
-     *    
-     *  - Alternatywnie: pchać wszystkie dane POSTem i rozwiązywać konflikty
-     *    po stronie serwera
-     */
-    this.sync = function(callback) {
+    var isValid = function(entry) {
+        for (var i = 0; i < requiredData.length; i++) {
+            fieldName = requiredData[i];
 
-        for(var i=0; i<data.lenght; i++) {
-            var entry = data[i];
-            if(typeof entry.id == 'undefined' || entry.id == null) {
-                // put data
-                $.ajax({
-                    type: "PUT",
-                    url: requestUri,
-                    dataType: 'jsonp',
-                    data: validate(entry)
-                }).done(function( result ) {
-                    entry.id = result.id;
-                    console.log( "Data uploaded correctly" );
-                }).fail(function(){
-                    console.log('Couldn\'t save data');
-                });                
-            }            
+            if (typeof entry[fieldName] === 'undefined') {
+                return false;
+            }
         }
+
+        return true;
+    }
+
+    this.reloadAll = function() {
+        var mergeWithLocal = function(serverData) {
+            data = validate(serverData);
+        };
+
+        var requestUri = "/fixtures/tasks.json";
+
+        Signals.data.syncStarted.dispatch();
 
         $.ajax({
             type: "GET",
-            url: requestUri,
-            dataType: 'jsonp',
-            contentType: 'application/json'
-        }).done(function( jsonData ) {
-            var dataToParse = jsonData.list;
-            data = new Array();
-            for(var i=0; i<dataToParse.length; i++) {
-                remoteEntry = validate(dataToParse[i]);
-                mergeFlag = false;
-
-                for(var j=0; j<data.length; j++) {
-                    localEntry = validate(data[j]);
-                    if(localEntry.id == remoteEntry.id) {
-                        mergeData(localEntry, remoteEntry);
-                        mergeFlag = true;
-                    }
-                }
-                
-                if(!mergeFlag) {
-                    data.push({id: dataToParse[i].id,
-                               ctime: dataToParse[i].ctime,
-                               mtime: dataToParse[i].mtime,
-                               deleted: dataToParse[i].deleted,
-                               name: dataToParse[i].name, 
-                               done: dataToParse[i].status});
-                }
-            }
+            url: requestUri
+                    //dataType: 'jsonp'
+        }).done(function(result) {
+            var serverData = parseData(result);
+            mergeWithLocal(serverData);
             save();
-            callback();
-        }).fail(function(){
-            debugger;
-            console.log('Couldn\'t fetch data');
+            console.log("Data synced");
+            Signals.data.syncFinished.dispatch(true);
+        }).fail(function() {
+            console.log('Couldn\'t get data');
+            Signals.data.syncFinished.dispatch(false);
         });
     };
-    
-    var mergeData = function(local, remote) {
-        var dataToSync = ['deleted', 'name', 'status', 'description'];
-        
-        if(local.mtime > remote.mtime) {
-            update(local);
+
+
+    this.sync2 = function() {
+        var mergeWithLocal = function(serverData) {
+            data = validate(serverData);
         }
-        else {
-            if(local.mtime != remote.mtime) {
-                for(var i=0; i<dataToSync.length; i++) {
+
+        // Deprecated: rozw konfliktów jest po stronie serwera
+        var resolveConfilct = function(local, remote) {
+            var dataToSync = requiredData;
+            data.splice(dataToSync.indexOf('id'), 1);
+            data.splice(dataToSync.indexOf('mtime'), 1);
+
+            if (remote.mtime !== local.mtime) {
+                for (var i = 0; i < dataToSync.length; i++) {
                     var param = dataToSync[i];
                     local[param] = remote[param];
                 }
             }
-        }        
-    }
-    
-    var update = function(entry) {
+
+            return local;
+        }
+
+
+        var requestUri = "/fixtures/sync.json";
+
+        Signals.data.syncStarted.dispatch();
+
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: requestUri,
-            dataType: 'jsonp',
-            data: validate(entry)
-        }).done(function( result ) {
-            console.log( "Data updated correctly" );
-        }).fail(function(){
-            console.log('Couldn\'t save data');
-        });   
+                    dataType: 'jsonp'
+                    //data: validate(data)
+        }).done(function(result) {
+            var serverData = parseData(result);
+            mergeWithLocal(serverData);
+            save();
+            console.log("Data synced");
+            Signals.data.syncFinished.dispatch(true);
+        }).fail(function() {
+            console.log('Couldn\'t get data');
+            Signals.data.syncFinished.dispatch(false);
+        });
     }
-    
-    var validate = function(entry) {
-        var requiredData = ['id', 'ctime', 'mtime', 'deleted', 'name', 'status', 'description'];
-        
-        for(var i=0; i<requiredData.length; i++) {
-            fieldName = requiredData[i];
-            
-            if(typeof entry[fieldName] === 'undefined') {
-                entry[fieldname] = null;
+
+    var parseData = function(data) {
+        for (var i = 0; i < data.length; i++) {
+            if (!isValid(data[i])) {
+                data.splice(i, 1);
             }
         }
-        
-        return entry;
 
-    }
+        return data;
+    };
+
+    Signals.data.forceSync.add(this.sync2);
+    Signals.data.forceReload.add(this.reloadAll);
+    
+    load();
 }

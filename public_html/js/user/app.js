@@ -2,15 +2,9 @@ var config = {
     serverUri: 'http://localhost'
 };
 
-var sampleData = [
-    {title: "Pierwszy task", description: "opis taska 1", done: false}, 
-    {title: "Drugi task", description: "opis taska 2", done: true},
-    {title: "Trzeci task", description: "opis taska 3", done: false}
-];
-
-var tasks = new DataStore();
+var taskData = new DataStore();
  
-var tasklist = new TaskListViewModel(sampleData);
+var tasklist = new TaskListViewModel();
 var navbar = new NavBarViewModel();
 var loginForm = new LoginFormViewModel();
  
