@@ -23,7 +23,7 @@ var LocalStore = function() {
         
         if (currentData != null) {
             for(var i=0; i<currentData.length; i++) {
-                var task = new Task(tmpdata[i]);
+                var task = new Task(currentData[i]);
                 tmpdata.push(task);
             }
         }
