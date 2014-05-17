@@ -1,7 +1,7 @@
 /* 
  */
 
-var DataStore = function() {
+var RemoteSync = function() {
     var self = this;
 
     this.data = new Array();
@@ -9,8 +9,9 @@ var DataStore = function() {
     var getAllUri = serverUri + '/rest/list';
     var syncUri = serverUri + '/rest/sync';
 
+    var allowedData = ['id', 'ctime', 'mtime', 'deleted', 'name', 'status', 'description', 'local_mtime'];
     var requiredData = ['id', 'ctime', 'mtime', 'deleted', 'name', 'status', 'description'];
-
+    
 
     this.getData = function() {
         return self.data;
@@ -56,25 +57,25 @@ var DataStore = function() {
                 else {
                     if (fieldName === 'status') {
                         if (entry[fieldName] === '1') {
-                            entry[fieldName] = 1;
+                            entry[fieldName] = true;
                         }
                         else {
-                            entry[fieldName] = 0;
+                            entry[fieldName] = false;
                         }
                     }
 
                     if (fieldName === 'deleted') {
                         if (entry[fieldName] === '1') {
-                            entry[fieldName] = 1;
+                            entry[fieldName] = true;
                         }
                         else {
-                            entry[fieldName] = 0;
+                            entry[fieldName] = false;
                         }
                     }
                 }
             }
             
-            entry.local_mtime = new Date().toString();
+            entry.local_mtime = new Date();
 
             return entry;
         }
@@ -157,7 +158,7 @@ var DataStore = function() {
             }
 
             return local;
-        }
+        };
 
 
         //var requestUri = "/fixtures/sync.json";
@@ -181,7 +182,7 @@ var DataStore = function() {
             console.log('Couldn\'t get data');
             Signals.data.syncFinished.dispatch(false);
         });
-    }
+    };
 
     var parseData = function(data) {
         for (var i = 0; i < data.length; i++) {
@@ -197,4 +198,4 @@ var DataStore = function() {
     Signals.data.forceReload.add(this.reloadAll);
     
     load();
-}
+};

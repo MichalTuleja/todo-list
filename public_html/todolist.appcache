@@ -15,7 +15,9 @@ CACHE MANIFEST
 /js/lib/vendor/crossroads.js
 /js/user/signals.js
 /js/user/filtering.js
-/js/user/model/DataStore.js
+/js/user/model/LocalStore.js
+/js/user/model/RemoteStore.js
+/js/user/model/Task.js
 /js/user/viewmodel/NavBar.js
 /js/user/viewmodel/LoginForm.js
 /js/user/viewmodel/TaskList.js

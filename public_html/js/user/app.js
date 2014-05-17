@@ -2,7 +2,7 @@ var config = {
     serverUri: 'http://todolist'
 };
 
-var taskData = new DataStore();
+var taskData = new LocalStore();
  
 var tasklist = new TaskListViewModel();
 var navbar = new NavBarViewModel();
