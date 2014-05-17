@@ -31,8 +31,10 @@ class Update extends Sync {
 
         $data = array_map('strip_tags',$data);
         $emptyFields = array_map(function($field){if($field != '') return 1; return 0;},$data);
+        
+        //$notImportant = ;;
 
-        if(!in_array(0,$emptyFields)){
+        if(false){ //!in_array(0,$emptyFields)
 
             $tId = (int)$data['id'];
 
@@ -66,27 +68,27 @@ class Update extends Sync {
 
                 if((int)$update > 0) {
 
-                    $out['data'] = ($merge = $this->getMerge()) ? $this->getMerge() : $data;
+                    $out = ($merge = $this->getMerge()) ? $this->getMerge() : $data;
                 }
                 else{
                     if(!empty($data['single'])){
                         return http_response_code(500);
                     }
                     else{
+                        $out = $data;
                         $out['error'] = 'database_error';
-                        $out['data'] = $data;
                     }
                 }
             }
             else{
-                $out['data'] = $data;
+                $out = $data;
                 $out['error'] = 'bad_id';
             }
         }
         else{
+            $out = $data;
             $errors = array_keys($emptyFields,0);
             $out['error'] = array_map(function($field){ return 'empty_field_' . $field; },$errors);
-            $out['data'] = $data;
         }
 
         return $out;

@@ -28,11 +28,9 @@ getRoute()->get('/home' , array('HomeController','display'));
 //list method
 getRoute()->get('/list' , array('ListController' , 'get'), EpiApi::external);
 getRoute()->post('/list' , array('ListController' , 'sync'), EpiApi::external);
-getRoute()->put('/list' , array('ListController' , 'sync'), EpiApi::external);
-getRoute()->delete('/list' , array('ListController' , 'sync'), EpiApi::external);
+getRoute()->post('/sync' , array('ListController' , 'sync'), EpiApi::external);
 
 //user method
-
 getRoute()->run();
 
 ?>

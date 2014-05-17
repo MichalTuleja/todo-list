@@ -4,7 +4,7 @@
 var DataStore = function() {
     var self = this;
 
-    var data = new Array();
+    this.data = new Array();
     var serverUri = config.serverUri;
     var getAllUri = serverUri + '/rest/list';
     var syncUri = serverUri + '/rest/sync';
@@ -13,32 +13,35 @@ var DataStore = function() {
 
 
     this.getData = function() {
-        return data;
+        return self.data;
     };
     
     this.update = function(currentData) {
-        data = currentData;
+        self.data = currentData;
         save();
     }
 
-    this.pushData = function() {
-        
-    };
-
     this.add = function(obj) {
-        data.push(obj);
+        if(self.data === null) {
+            self.data = new Array();
+        }
+        
+        self.data.push(validate(obj));
         save();
     };
 
     var save = function() {
-        store.set('todolist', data);
+        store.set('todolist', self.data);
     };
 
     var load = function() {
-        tmpdata = store.get('todolist');
+        var tmpdata = store.get('todolist');
 
         if (tmpdata != null) {
-            data = tmpdata;
+            self.data = tmpdata;
+        }
+        else {
+            Signals.data.forceReload.dispatch();
         }
     };
 
@@ -53,24 +56,25 @@ var DataStore = function() {
                 else {
                     if (fieldName === 'status') {
                         if (entry[fieldName] === '1') {
-                            entry[fieldName] = true;
+                            entry[fieldName] = 1;
                         }
                         else {
-                            entry[fieldName] = false;
+                            entry[fieldName] = 0;
                         }
                     }
 
                     if (fieldName === 'deleted') {
                         if (entry[fieldName] === '1') {
-                            entry[fieldName] = true;
+                            entry[fieldName] = 1;
                         }
                         else {
-                            entry[fieldName] = false;
+                            entry[fieldName] = 0;
                         }
                     }
                 }
-
             }
+            
+            entry.local_mtime = new Date().toString();
 
             return entry;
         }
@@ -108,17 +112,19 @@ var DataStore = function() {
 
     this.reloadAll = function() {
         var mergeWithLocal = function(serverData) {
-            data = validate(serverData);
+            self.data = validate(serverData);
         };
 
-        var requestUri = "/fixtures/tasks.json";
+        //var requestUri = "/fixtures/tasks.json";
+        var requestUri = getAllUri;
 
         Signals.data.syncStarted.dispatch();
 
         $.ajax({
             type: "GET",
-            url: requestUri
-                    //dataType: 'jsonp'
+            url: requestUri,
+            dataType: 'jsonp',
+            contentType: 'application/json; charset=UTF-8'
         }).done(function(result) {
             var serverData = parseData(result);
             mergeWithLocal(serverData);
@@ -134,14 +140,14 @@ var DataStore = function() {
 
     this.sync2 = function() {
         var mergeWithLocal = function(serverData) {
-            data = validate(serverData);
+            self.data = validate(serverData);
         }
 
         // Deprecated: rozw konfliktów jest po stronie serwera
         var resolveConfilct = function(local, remote) {
             var dataToSync = requiredData;
-            data.splice(dataToSync.indexOf('id'), 1);
-            data.splice(dataToSync.indexOf('mtime'), 1);
+            self.data.splice(dataToSync.indexOf('id'), 1);
+            self.data.splice(dataToSync.indexOf('mtime'), 1);
 
             if (remote.mtime !== local.mtime) {
                 for (var i = 0; i < dataToSync.length; i++) {
@@ -154,22 +160,24 @@ var DataStore = function() {
         }
 
 
-        var requestUri = "/fixtures/sync.json";
+        //var requestUri = "/fixtures/sync.json";
+        var requestUri = syncUri;
 
         Signals.data.syncStarted.dispatch();
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: requestUri,
-                    dataType: 'jsonp'
-                    //data: validate(data)
+            dataType: 'jsonp',
+            data: JSON.stringify(validate(self.data)),
+            contentType: 'application/json; charset=UTF-8'
         }).done(function(result) {
             var serverData = parseData(result);
             mergeWithLocal(serverData);
             save();
             console.log("Data synced");
             Signals.data.syncFinished.dispatch(true);
-        }).fail(function() {
+        }).fail(function(result) {
             console.log('Couldn\'t get data');
             Signals.data.syncFinished.dispatch(false);
         });

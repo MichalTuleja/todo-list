@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="todolist.appcache">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -101,28 +100,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="new-task-modal-label">Nowe zadanie</h4>
                     </div>
-                    <form class="form-horizontal" role="form" data-bind="submit: addItem">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="inputTaskTitle" class="col-sm-2 control-label">Tytuł</label>
-                                <div class="col-sm-10 left-inner-addon">
-                                    <i class="glyphicon glyphicon-header"></i>
-                                    <input id="inputTaskTitle" type="text" class="form-control" data-bind="value: itemToAddTitle, valueUpdate: 'afterkeydown'" placeholder="Tytuł" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputTaskDesc" class="col-sm-2 control-label">Opis</label>
-                                <div class="col-sm-10 left-inner-addon">
-                                    <i class="glyphicon glyphicon-comment"></i>
-                                    <input id="inputTaskDesc" type="text" class="form-control" data-bind="value: itemToAddDesc, valueUpdate: 'afterkeydown'" placeholder="Opis zadania">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" data-bind="enable: itemToAddTitle().length > 0" type="submit"><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
-                        </div>
-                    </form>
+
                 </div>
             </div>
         </div>
@@ -223,16 +201,50 @@
                         <small>Status: <strong><span data-bind="text: status">Unknown</span></strong></small>
                     </div>
                 </div>
+
                 <table class="table table-condensed" id="task-list" data-bind='foreach: items'>
                     <tr class="task-list-header">
-                        <td class="collapsed" data-toggle="collapse" data-parent="#task-list" data-bind="text: name, attr: {href: '#item-list-collapsable' + $index()}">Opis zadania 1</td>
+                        <td class="collapsed" data-toggle="collapse" data-parent="#task-list" data-bind="attr: {href: '#item-list-collapsable' + $index()}">
+                            <span data-bind="text: name"></span>
+                        </td>
                         <td><input type="checkbox" data-bind="checked: status, event: {change: $parent.onChange }" class="task-checkbox align-right" /></td>
                     </tr>
-                    <tr class="task-list-body"><td colspan="2" class="task-list-desc collapse" data-bind="text: description, attr: {id: 'item-list-collapsable' + $index()}">Opis zadania 1</td></tr>
+                    <tr class="task-list-body">
+                        <td colspan="2" class="task-list-desc collapse" data-bind="attr: {id: 'item-list-collapsable' + $index()}" style="padding-left: 5%; padding-right: 10%;">
+                            <div class="panel panel-default" >
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <span data-bind="text: description"></span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="pull-right">
+                                                <button class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
                 </table>
-                <button class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#new-task-modal"  type="button"><span class="glyphicon glyphicon-plus"></span> Nowe zadanie</button>
+
+                <form role="form" data-bind="submit: addItem">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" data-bind="value: itemToAddTitle">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-        </div>    
+        </div>
 
         <div class="container hidden-container" id="profile-container">
             <div class="jumbotron">

@@ -1,5 +1,5 @@
 var config = {
-    serverUri: 'http://localhost'
+    serverUri: 'http://todolist'
 };
 
 var taskData = new DataStore();
@@ -17,6 +17,6 @@ $(document).ready(function(){
     ko.applyBindings(loginForm, document.getElementById('signin-container'));
     
     navbar.userName('Michal Tuleja');
-    navbar.isAdmin(true);
+    navbar.isAdmin(false);
     navbar.isVisible(true);
 });
