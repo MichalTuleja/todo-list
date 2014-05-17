@@ -1,7 +1,5 @@
 CACHE MANIFEST
 /index.html
-/js/lib/formTempSaver.js
-/js/lib/FormTempSaver.js
 /js/lib/jQueryExtensions.js
 /js/lib/vendor/signals.js
 /js/lib/vendor/store.js

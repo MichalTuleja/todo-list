@@ -12,8 +12,8 @@ var TaskListViewModel = function() {
     this.addItem = function() {
         if (this.itemToAddTitle() != "") {
             var newItem = {
-                name: this.itemToAddTitle(), 
-                description: this.itemToAddTitle(), 
+                name: this.itemToAddTitle(),
+                description: this.itemToAddTitle(),
                 status: false
             };
             
