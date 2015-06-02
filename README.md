@@ -1,18 +1,16 @@
-Dodanie plików do projektu:
-git add [nazwa_pliku] [nazwa_folderu] ...
+== Description ==
+This project is a simple TODO list, featuring of HTML5 offline applications.
 
-Dodanie zakommitowanych przez siebie zmian:
+== Features ==
+* Offline mode
+* Data synchronization after reconnect
+* Responsive layout
 
-git remote add origin https://github.com/MichalTuleja/cloud-project.git
+== Already implemented ==
+* User interface
+* HTML app manifest file
+* Simple backend, for storing todos
 
-git push -u origin master
-
-
-Pobranie naświeższej wersji:
-
-git pull origin master
-
-
-
-Na wypadek problemów z certyfikatem SSL:
-git config --global http.sslVerify false
+== Not yet implemented ==
+* User accounts
+* Admin backend
