@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="todolist.appcache">
+<html lang="en" manifest="appcache.manifest.excluded">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,11 +11,11 @@
         <title>TODO List</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="common/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/navbar-fixed-top.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
+        <link href="common/css/navbar-fixed-top.css" rel="stylesheet">
+        <link href="common/css/custom.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -40,16 +40,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" id="show-tasks"><span class="glyphicon glyphicon-list"></span> Lista zadań</a></li>
-                        <li><a href="#stats" id="show-stats"><span class="glyphicon glyphicon-signal"></span> Statystyki</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <div class="align-right right-inner-addon" style="margin-top: 7px">
-                                <i class="glyphicon glyphicon-search"></i>
-                                <input type="text" class="form-control" placeholder="Wyszukaj" id="task-list-filter">
-                            </div>
-                        </li>
                         <li data-bind="visible: isAdmin"><a href="admin.html"><span class="glyphicon glyphicon-cog"></span> Administracja</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span data-bind="text: userName">User Name</span> <b class="caret"></b></a>
@@ -198,8 +190,15 @@
         </div>
 
         <div class="container" id="list-container">
-            <div class="jumbotron">
+            
+            <div class="container">     
+                <div class="right-inner-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="text" class="form-control" placeholder="Wyszukaj" id="task-list-filter">
+                </div>
+            </div>
 
+            <div class="container">
                 <form role="form" data-bind="submit: addItem">
                     <div class="input-group">
                         <input type="text" class="form-control" data-bind="value: itemToAddTitle">
@@ -208,7 +207,9 @@
                         </span>
                     </div>
                 </form>
+            </div>
 
+            <div class="container">
                 <table class="table table-condensed" id="task-list" data-bind='foreach: items'>
                     <tr class="task-list-header">
                         <td class="collapsed" data-toggle="collapse" data-parent="#task-list" data-bind="attr: {href: '#item-list-collapsable' + $index()}">
@@ -369,22 +370,22 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/lib/vendor/jquery.min.js"></script>
-        <script src="js/lib/vendor/bootstrap.min.js"></script>
-        <script src="js/lib/vendor/knockout-3.1.0.js"></script>
-        <script src="js/lib/vendor/signals.min.js"></script>
-        <script src="js/lib/vendor/store.min.js"></script>
-        <script src="js/lib/jQueryExtensions.js"></script>
+        <script src="common/libraries/vendor/jquery.min.js"></script>
+        <script src="common/libraries/vendor/bootstrap.min.js"></script>
+        <script src="common/libraries/vendor/knockout-3.1.0.js"></script>
+        <script src="common/libraries/vendor/signals.min.js"></script>
+        <script src="common/libraries/vendor/store.min.js"></script>
+        <script src="common/libraries/jQueryExtensions.js"></script>
 
-        <script src="js/user/model/Task.js"></script>
-        <script src="js/user/model/LocalStore.js"></script>
+        <script src="main/js/model/Task.js"></script>
+        <script src="main/js/model/LocalStore.js"></script>
 
-        <script src="js/user/viewmodel/NavBar.js"></script>
-        <script src="js/user/viewmodel/LoginForm.js"></script>
-        <script src="js/user/viewmodel/TaskList.js"></script>
-        <script src="js/user/routing.js"></script>
-        <script src="js/user/signals.js"></script>
-        <script src="js/user/filtering.js"></script>
-        <script src="js/user/app.js"></script>
+        <script src="main/js/viewmodel/NavBar.js"></script>
+        <script src="main/js/viewmodel/LoginForm.js"></script>
+        <script src="main/js/viewmodel/TaskList.js"></script>
+        <script src="main/js/routing.js"></script>
+        <script src="main/js/signals.js"></script>
+        <script src="main/js/filtering.js"></script>
+        <script src="main/js/app.js"></script>
     </body>
 </html>
