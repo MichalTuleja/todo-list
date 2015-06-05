@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" manifest="appcache.manifest.excluded">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="ico/favicon.ico">
+
+        <title>TODO List - Admin</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="common/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="common/css/navbar-fixed-top.css" rel="stylesheet">
+        <link href="common/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="container hidden-container" id="useredit-container">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>Edycja użytkownika</p>
+                    </div>
+                </div>
+                <form class="form-horizontal" role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputChangeUserName" class="col-sm-2 control-label">Imię</label>
+                            <div class="col-sm-10 left-inner-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <input id="inputChangeUserName" type="text" class="form-control" placeholder="Imię" value="Michał" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputChangeUserSurname" class="col-sm-2 control-label">Nazwisko</label>
+                            <div class="col-sm-10 left-inner-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <input id="inputChangeUserSurname" type="text" class="form-control" placeholder="Nazwisko" value="Tuleja" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputChangeUserEmail" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10 left-inner-addon">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                                <input id="inputChangeEmail" type="email" class="form-control" placeholder="user@example.com" value="user@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectChangeUserRole" class="col-sm-2 control-label">Rola</label>
+                            <div class="col-sm-10">
+                                <select id="selectChangeUserRole" class="form-control">
+                                    <option value="1" selected>Admin</option>
+                                    <option value="2">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputChangeUserActive" class="col-sm-2 control-label">Aktywny</label>
+                            <div class="col-sm-2">
+                                <input id="inputChangeUserActive" type="checkbox" class="task-checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#password-modal"><span class="glyphicon glyphicon-lock"></span> Nowe hasło</button>
+                        </div>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Zapisz</button>
+                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Anuluj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="common/libraries/vendor/jquery.min.js"></script>
+        <script src="common/libraries/vendor/bootstrap.min.js"></script>
+        <script src="common/libraries/vendor/knockout-3.1.0.js"></script>
+        <script src="common/libraries/vendor/signals.min.js"></script>
+        <script src="common/libraries/vendor/store.min.js"></script>
+        <script src="common/libraries/jQueryExtensions.js"></script>
+
+        <script src="main/js/model/Task.js"></script>
+        <script src="main/js/model/LocalStore.js"></script>
+
+        <script src="main/js/viewmodel/NavBar.js"></script>
+        <script src="main/js/viewmodel/LoginForm.js"></script>
+        <script src="main/js/viewmodel/TaskList.js"></script>
+        <script src="main/js/routing.js"></script>
+        <script src="main/js/signals.js"></script>
+        <script src="main/js/filtering.js"></script>
+        <script src="main/js/app.js"></script>
+    </body>
+</html>

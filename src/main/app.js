@@ -1,8 +1,13 @@
-var config = {
-    serverUri: 'http://todolist'
-};
+/* 
+ */
+'use strict';
 
-var taskData = new LocalStore();
+window.$ = window.jQuery = require('jquery');
+var bootstrap = require('../common/libraries/vendor/bootstrap.min');
+var ko = require('../common/libraries/vendor/knockout-3.1.0');
+
+
+//var taskData = new LocalStore();
  
 var tasklist = new TaskListViewModel();
 var navbar = new NavBarViewModel();
@@ -16,7 +21,6 @@ $(document).ready(function(){
     ko.applyBindings(navbar, document.getElementById('navbar'));
     ko.applyBindings(loginForm, document.getElementById('signin-container'));
     
-    navbar.userName('Michal Tuleja');
-    navbar.isAdmin(false);
+    navbar.userName('User1');
     navbar.isVisible(true);
 });

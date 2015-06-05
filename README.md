@@ -6,7 +6,7 @@ This project is a simple TODO list, featuring of HTML5 offline applications.
 * Clone this repo
 * <path_to_node>/npm install
 * <path_to_node>/grunt
-* Open browser and go to http://localhost:8282/
+* Open browser and go to http://localhost:8282/main
 
 ## Features
 * Offline mode
@@ -16,7 +16,6 @@ This project is a simple TODO list, featuring of HTML5 offline applications.
 ## Already implemented
 * User interface
 * HTML app manifest file
-* Simple backend, for storing todos
 
 ## Not yet implemented
 * User accounts

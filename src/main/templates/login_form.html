@@ -1,0 +1,26 @@
+<!--Login Container-->
+<div class="container hidden-container" id="signin-container">
+    <div class="jumbotron" data-bind="visible: isVisible">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Logowanie</p>
+            </div>
+            <div class="col-md-4">
+                <form class="form-signin" role="form" data-bind="submit: login">
+                    <div class="left-inner-addon width-full">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        <input type="email" class="form-control" placeholder="Email" required autofocus data-bind="value: user">
+                    </div>
+                    <div class="left-inner-addon width-full">
+                        <i class="glyphicon glyphicon-lock"></i>
+                        <input type="password" class="form-control" placeholder="Hasło" required data-bind="value: pass">
+                    </div>
+                    <!--<label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                    </label>-->
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" data-bind="text: buttonText">Zaloguj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
