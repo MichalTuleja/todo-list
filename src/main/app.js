@@ -2,25 +2,14 @@
  */
 'use strict';
 
-window.$ = window.jQuery = require('jquery');
-var bootstrap = require('../common/libraries/vendor/bootstrap.min');
-var ko = require('../common/libraries/vendor/knockout-3.1.0');
+//window.$ = window.jQuery = require('jquery');
+var angular = require('angular');
+
+require('angular-bootstrap-npm');
+
+//var bootstrap = require('../common/libraries/vendor/bootstrap.min'); 
+
+var todoApp = angular.module('todoApp', ['ui.bootstrap']);
 
 
-//var taskData = new LocalStore();
- 
-var tasklist = new TaskListViewModel();
-var navbar = new NavBarViewModel();
-var loginForm = new LoginFormViewModel();
- 
-$(document).ready(function(){
-    Router.initialize();
-    Router.switchTo('list-container');
-  
-    ko.applyBindings(tasklist, document.getElementById('list-container'));
-    ko.applyBindings(navbar, document.getElementById('navbar'));
-    ko.applyBindings(loginForm, document.getElementById('signin-container'));
-    
-    navbar.userName('User1');
-    navbar.isVisible(true);
-});
+todoApp.controller('TodoListCtrl', require('./controllers/appCtrl'));

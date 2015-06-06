@@ -1,0 +1,20 @@
+<div class="container">
+  <accordion close-others="oneAtATime">
+    <accordion-group ng-repeat="todo in todos | filter: searchInput">
+        <accordion-heading>
+            <span ng-show="todo.done"><s>{{todo.title}}</s></span>
+            <span ng-show="todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#449d44"></span>
+            
+            <span ng-show="!todo.done">{{todo.title}}</s></span>
+            <span ng-show="!todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#DDD"></span>
+        </accordion-heading>
+
+        <p><span data-bind="text: description">{{todo.description}}</span></p>
+        <p style="font-family: Courier">
+            <small>
+                server_ctime: {{todo.ctime}} | server_mtime: {{todo.mtime}} | local_mtime: {{todo.local_mtime}}
+            </small>
+        </p>
+    </accordion-group>
+  </accordion>
+</div>

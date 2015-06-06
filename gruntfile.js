@@ -37,7 +37,7 @@ grunt.initConfig({
 	  main: {
 		files: [
 		  // includes files within path 
-		  {expand: true, cwd: 'src/main/', src: ['index.html', '**/*.css'], dest: 'build/main'},
+		  {expand: true, cwd: 'src/main/', src: ['index.html', '**/*.css', '**/*.png', '**/*.ico'], dest: 'build/main'},
           {expand: true, cwd: 'src/common', src: ['**/*.css', '**/glyphicons*.*'], dest: 'build/main'},
 		  // includes files within path and its sub-directories 
 		  //{expand: true, src: ['path/**'], dest: 'dest/'},
@@ -83,7 +83,15 @@ grunt.initConfig({
                     test: []
                 },
                 sections: {
-                    templates: 'src/main/templates/**/*.html',
+                    modals: 'src/main/templates/modals/*.html',
+                    layout: {
+                        header: 'src/main/templates/base/header.html',
+                        footer: 'src/main/templates/base/footer.html',
+                        add_item: 'src/main/templates/base/add_item.html',
+                        search: 'src/main/templates/base/search.html',
+                        task_list: 'src/main/templates/base/task_list.html',
+                        navbar: 'src/main/templates/base/navbar.html'
+                    }
                 },
                 data: {
                     // Data to pass to templates 
@@ -96,13 +104,13 @@ grunt.initConfig({
     
     watch: {
         scripts: {
-          files: ['src/**/*.js', 'src/**/*.html', 'src/**/*.css', './gruntfile.js'],
-          tasks: ['build'],
-          options: {
-            spawn: false,
-          },
+            files: ['src/**/*.js', 'src/**/*.html', 'src/**/*.css', './gruntfile.js'],
+            tasks: ['build'],
+            options: {
+                spawn: false,
+            },
         },
-      },
+    },
 });
 
 grunt.loadNpmTasks('grunt-contrib-copy');

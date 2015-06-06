@@ -1,26 +1,31 @@
 CACHE MANIFEST
-/index.html
 /app.js
-/js/user/app.js
-/fixtures/sync.json
-/fixtures/tasks.json
-/fixtures/users.json
-/fonts/glyphicons-halflings-regular.svg
-/fonts/glyphicons-halflings-regular.woff
-/fonts/glyphicons-halflings-regular.ttf
-/fonts/glyphicons-halflings-regular.eot
-/css/bootstrap-theme.css
-/css/bootstrap.css.map
-/css/navbar-fixed-top.css
+/css
 /css/bootstrap-theme.min.css
 /css/bootstrap.css
+/css/bootstrap-theme.css
+/css/navbar-fixed-top.css
 /css/custom.css
 /css/bootstrap.min.css
-/css/bootstrap-theme.css.map
-
+/img
+/img/Icon-76.png
+/img/Icon-60@2x.png
+/img/Icon-Small@3x.png
+/img/Icon-Small@2x.png
+/img/ic_launcher.png
+/img/Icon-40.png
+/img/Icon-Small.png
+/img/Icon-76@2x.png
+/img/Icon-60@3x.png
+/img/icon.png
+/img/Icon-40@2x.png
+/index.html
+/fonts
+/fonts/glyphicons-halflings-regular.ttf
+/fonts/glyphicons-halflings-regular.svg
+/fonts/glyphicons-halflings-regular.woff
+/fonts/glyphicons-halflings-regular.eot
 
 NETWORK:
-/docs
-/docs/index.html
 
 FALLBACK:
