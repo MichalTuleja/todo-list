@@ -1,15 +1,17 @@
-/* 
+/* TODO HTML5 Offline App
+ * 
+ * Author: Michal Tuleja <michal.tuleja@outlook.com>
  */
+
 'use strict';
 
-//window.$ = window.jQuery = require('jquery');
+// Include libraries
 var angular = require('angular');
-
 require('angular-bootstrap-npm');
+require('angular-storage');
 
-//var bootstrap = require('../common/libraries/vendor/bootstrap.min'); 
+// Initialize app
+var todoApp = angular.module('todoApp', ['ui.bootstrap', 'angular-storage']);
 
-var todoApp = angular.module('todoApp', ['ui.bootstrap']);
-
-
+// Initialize controllers
 todoApp.controller('TodoListCtrl', require('./controllers/appCtrl'));

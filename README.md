@@ -14,11 +14,11 @@ The application users browser application cache, which allows you to use all fea
 ### Already implemented
 * User interface
 * Offline mode
+* Local database
 
 ### Not yet implemented
 * User accounts
 * Admin backend
-* Local database
 * Remote database, for storing data in cloud
 
 ### How to run locally

@@ -1,20 +1,28 @@
 <div class="container">
-  <accordion close-others="oneAtATime">
-    <accordion-group ng-repeat="todo in todos | filter: searchInput">
-        <accordion-heading>
-            <span ng-show="todo.done"><s>{{todo.title}}</s></span>
-            <span ng-show="todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#449d44"></span>
-            
-            <span ng-show="!todo.done">{{todo.title}}</s></span>
-            <span ng-show="!todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#DDD"></span>
-        </accordion-heading>
 
-        <p><span data-bind="text: description">{{todo.description}}</span></p>
-        <p style="font-family: Courier">
-            <small>
-                server_ctime: {{todo.ctime}} | server_mtime: {{todo.mtime}} | local_mtime: {{todo.local_mtime}}
-            </small>
-        </p>
-    </accordion-group>
-  </accordion>
+    <div ng-repeat="todo in todos | filter: searchInput | orderBy:'mtime' track by todo.title+todo.ctime">
+        <div ng-init="isCollapsed = true">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-style="todo.done && {'text-decoration':'line-through'}" aria-label="..." ng-model="todo.title">
+                        <span class="input-group-addon" ng-click="todo.done=!todo.done">
+                            <span ng-show="todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#449d44"></span>
+                            <span ng-show="!todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#DDD"></span>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+        </div>
+        <div collapse="isCollapsed">
+            <div class="well well-lg">
+                <p>{{todo.description}}</p>
+                <p style="font-family: Courier">
+                    <small>
+                        server_ctime: {{todo.ctime}} | server_mtime: {{todo.mtime}} | local_mtime: {{todo.local_mtime}}
+                    </small>
+                </p>
+            </div> 
+        </div>
+    </div>
 </div>

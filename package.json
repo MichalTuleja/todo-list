@@ -11,6 +11,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "jquery": "~2.1.4",
     "angular": "~1.4.0",
-    "angular-bootstrap-npm": "~0.13.0"
+    "angular-bootstrap-npm": "~0.13.0",
+    "angular-storage": "0.0.11"
   }
 }
