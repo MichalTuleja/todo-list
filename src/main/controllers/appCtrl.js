@@ -4,8 +4,8 @@
 module.exports = function($scope, store) {
     
     var storage = [
-        {'title': 'Buy eggs', 'description': 'Medium size', ctime: '1433547222', mtime: '1433547452', local_mtime: '1433547782', done: false},
-        {'title': 'Repair car', 'description': 'Clutch & Brakes', ctime: '1433556122', mtime: '1433234122', local_mtime: '1433545622', done: true},
+        {'title': 'Buy eggs', 'description': 'Medium size', ctime: '1433547222', mtime: '1433547452', local_mtime: '1433547782', done: false, deleted: false},
+        {'title': 'Repair car', 'description': 'Clutch & Brakes', ctime: '1433556122', mtime: '1433234122', local_mtime: '1433545622', done: true, deleted: false},
     ];
 
     var addTask = function() {
@@ -22,7 +22,8 @@ module.exports = function($scope, store) {
                 ctime: currentTimestamp, 
                 mtime: currentTimestamp,
                 local_mtime: currentTimestamp, 
-                done: false
+                done: false,
+                deleted: false
             });
             
         resetInput();
@@ -51,6 +52,12 @@ module.exports = function($scope, store) {
         }
     };
     
+    var deleteIfEmpty = function(todo) {
+        if(todo.title === '') {
+            todo.deleted = true;
+        }
+    };
+    
     $scope.$watch('todos',function() {
         saveTodos();
     },true);
@@ -59,8 +66,7 @@ module.exports = function($scope, store) {
     $scope.navbarCollapsed = true;
     $scope.newTaskInput = '';
     $scope.saveTodos = saveTodos;
+    $scope.deleteIfEmpty = deleteIfEmpty;
     
     loadTodos();
-    
-
 };

@@ -1,0 +1,64 @@
+<html lang="en" manifest="">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <title>TODO List - help</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <div id="navbar" class="navbar navbar-default navbar-fixed-top" data-bind="visible: isVisible" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../" id="logo" data-bind="click: sync">TODO List</a>
+            </div>
+            <div class="navbar-collapse collapse" collapse="navbarCollapsed" style="height: 0px;">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>App features</h2>
+        <h3>Main menu shortcut</h3>
+        <p>You can create a shortcut on you home screen under Android/iOS</p>
+        <img src="img/image4.PNG" alt="" style="height: 420px"/>
+        <img src="img/image1.png" alt="" style="height: 420px"/>
+        <img src="img/image2.png" alt="" style="height: 420px"/>
+        <h3>Offline mode</h3>
+        <p>Due to HTML5 manifest file, this app does not require an internet connection to use it in offline mode. You can try an airplane mode and refresh the page. All data will be preserved and you can still access the app.</p>
+        <img src="img/image3.PNG" alt="" style="height: 420px"/>
+    </div>
+
+    <div class="container" style="margin-top:30px; padding: 0px;">
+        <div class="jumbotron text-right" style="padding: 20px;">
+            <small class="">
+                Created by <b><a href="http://www.michal.tuleja.de">Michal Tuleja</a></b>
+            </small>
+        </div>
+    </div>
+</body></html>

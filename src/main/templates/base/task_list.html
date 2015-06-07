@@ -1,11 +1,11 @@
 <div class="container">
 
-    <div ng-repeat="todo in todos | filter: searchInput | orderBy:'mtime' track by todo.title+todo.ctime">
+    <div ng-repeat="todo in todos | filter: searchInput | filter: { deleted: false } | orderBy:'mtime' track by todo.title+todo.ctime">
         <div ng-init="isCollapsed = true">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group">
-                        <input type="text" class="form-control" ng-style="todo.done && {'text-decoration':'line-through'}" aria-label="..." ng-model="todo.title">
+                        <input type="text" class="form-control" ng-style="todo.done && {'text-decoration':'line-through'}" aria-label="..." ng-model="todo.title" ng-blur="deleteIfEmpty(todo)">
                         <span class="input-group-addon" ng-click="todo.done=!todo.done">
                             <span ng-show="todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#449d44"></span>
                             <span ng-show="!todo.done" class="pull-right glyphicon glyphicon-ok" style="color:#DDD"></span>

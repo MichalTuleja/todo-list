@@ -37,7 +37,7 @@ grunt.initConfig({
 	  main: {
 		files: [
 		  // includes files within path 
-		  {expand: true, cwd: 'src/main/', src: ['index.html', '**/*.css', '**/*.png', '**/*.ico'], dest: 'build/main'},
+		  {expand: true, cwd: 'src/main/', src: ['index.html', 'docs/*.html', '**/*.css', '**/*.png', '**/*.PNG', '**/*.ico'], dest: 'build/main'},
           {expand: true, cwd: 'src/common', src: ['**/*.css', '**/glyphicons*.*'], dest: 'build/main'},
 		  // includes files within path and its sub-directories 
 		  //{expand: true, src: ['path/**'], dest: 'dest/'},

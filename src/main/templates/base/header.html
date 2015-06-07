@@ -1,6 +1,7 @@
-<div class="container">
-    <div class="jumbotron">
-        <p>Welcome to Todo List Application</p>
-        <p>Try new offline features | Test iPhone features making shortcut on your main screen</p>
+<div class="container" ng-init="showJumbo = true">
+    <div class="jumbotron" ng-show="showJumbo">
+        <p>Welcome to Todo List Application<small class="pull-right"><a href="#" ng-click="showJumbo = false">Hide</a></small></p>
+        <p>Try new offline features | Test iPhone features making shortcut on your main screen | <a href="docs/help.html">Learn more</a></p>
+        
     </div>
 </div>
