@@ -4,7 +4,7 @@ This project is a simple TODO list, featuring of HTML5 offline applications.
 You can try it on your smartphone under this link:
 http://michal.tuleja.de/demo/todo/
 
-The application users browser application cache, which allows you to use all features even having airplane mode enabled. Just create shourtcat on your main screen, enable airplane mode and open the app :)
+The application users browser application cache, which allows you to use all features even having airplane mode enabled. Just create shortcut on your main screen, enable airplane mode and open the app :)
 
 ### Features
 * Offline mode
